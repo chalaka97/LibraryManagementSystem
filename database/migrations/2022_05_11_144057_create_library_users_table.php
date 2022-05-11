@@ -17,7 +17,6 @@ class CreateLibraryUsersTable extends Migration
             $table->id();
             $table->string('u_name');
             $table->string('u_email')->unique();
-            $table->string('password');
             $table->string('u_type');
             $table->timestamp('is_suspended')->nullable();
             $table->timestamps();

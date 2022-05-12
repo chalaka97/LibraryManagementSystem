@@ -32,7 +32,7 @@
                 </li>
             </div>
             <div class="col-10 mt-3">
-                <h3 class="text">Fined Details</h3>
+                <h3 class="text">Borrowed Book Details</h3>
                 <form class="row g-3" method="post" enctype="multipart/form-data" action="">
                     @csrf
 
@@ -45,22 +45,22 @@
                                     <th scope="col">User</th>
                                     <th scope="col">Book</th>
                                     <th scope="col">Book Type</th>
-                                    <th scope="col">Total Days</th>
-                                    <th scope="col">Total Payment</th>
+                                    <th scope="col">Date</th>
                                     <th scope="col">Action</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>321</td>
-                                    <td>Supun - Student</td>
-                                    <td>Gam peraliya</td>
-                                    <td>Reference</td>
-                                    <td>5</td>
-                                    <td>220</td>
+                                @foreach($borrowedBooks as $dataBorrowedBooks)
+                                <tr>lz
+                                    <td>{{$borrowedBooks->id}}</td>
+                                    <td>{{$borrowedBooks->u_name}}</td>
+                                    <td>{{$borrowedBooks->b_title}}</td>
+                                    <td>{{$borrowedBooks->b_type}}</td>
+                                    <td>{{$borrowedBooks->borrow_date}}</td>
                                     <td> <button class="btn btn-primary" type="submit">Mark as received</button></td>
                                 </tr>
+                                @endforeach
 
                                 </tbody>
                             </table>

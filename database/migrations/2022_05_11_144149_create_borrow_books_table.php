@@ -19,9 +19,10 @@ class CreateBorrowBooksTable extends Migration
             $table->foreign('user_id')->references('id')->on('library_users')->onDelete('cascade');
             $table->integer('book_id');
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
+            $table->string('	b_book_type');
             $table->timestamp('borrow_date');
             $table->integer('is_overdue')->default(0);
-            $table->timestamp('received_date');
+            $table->timestamp('received_date')->nullable();
             $table->timestamps();
         });
     }

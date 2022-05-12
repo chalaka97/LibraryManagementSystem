@@ -19,7 +19,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\BorrowBooksController::class, 'index'])->name('home');
+Route::get('/borrowed', [App\Http\Controllers\BorrowBooksController::class, 'borrowedBook'])->name('borrowed');
+Route::post('/checkadd', [App\Http\Controllers\BorrowBooksController::class, 'checkAvailability'])->name('checkadd');
+
+
 Route::get('/fined-details', [App\Http\Controllers\FinedDetailsController::class, 'index'])->name('fined-details');
 Route::get('/users', [App\Http\Controllers\LibraryUsersController::class, 'index'])->name('users');
+Route::post('/addlibraryuser',[App\Http\Controllers\LibraryUsersController::class,'addUser'])->name('addlibraryuser');
+
 Route::get('/books', [App\Http\Controllers\BooksController::class, 'index'])->name('books');
+Route::post('/addbook', [App\Http\Controllers\BooksController::class, 'addBook'])->name('addbook');
+

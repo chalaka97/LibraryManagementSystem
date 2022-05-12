@@ -19,7 +19,7 @@ class CreateFinedDetailsTable extends Migration
             $table->foreign('f_user_id')->references('id')->on('library_users')->onDelete('cascade');
             $table->integer('f_b_book_id');
             $table->foreign('f_b_book_id')->references('id')->on('borrow_books')->onDelete('cascade');
-            $table->integer('f_days');
+            $table->integer('f_days'); //total days count
             $table->double('f_total_payment');
             $table->timestamps();
         });

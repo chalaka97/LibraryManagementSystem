@@ -27,50 +27,33 @@
                 </li>
             </div>
             <div class="col-10 mt-3">
-                <h3 class="text">Borrow Books</h3>
+                <h3 class="text">Add Book</h3>
                 <form class="row g-3" method="post" enctype="multipart/form-data" action="">
                     @csrf
-
                     <div class="col-md-6">
-                        <label for="validationAddress" class="form-label">User</label>
+                        <label for="validationBookName" class="form-label">Book Name</label>
+                        <input type="text" id="validationBookName" class="form-control" name="bookname">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationBookAuthor" class="form-label">Book Author</label>
+                        <input type="text" id="validationBookAuthor" class="form-control" name="bookauthor">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationBookType" class="form-label">Book Type</label>
                         <div class="input-group">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select User</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select" id="validationBookType" aria-label="Default select example">
+                                <option value="Reference">Reference</option>
+                                <option value="Lending">Lending</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="validationAddress" class="form-label">Book</label>
-                        <div class="input-group">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Select User</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-                    </div>
-                   {{-- <div class="col-md-3">
-                        <label for="validationDate" class="form-label">Date</label>
-                        <input type="date" name="pre_date" min="2022-05-06" class="form-control" id="validationDate"
-                               required>
-                        --}}{{--<span class="text text-danger">@error('pre_date'){{ $message }} @enderror</span>--}}{{--
-                    </div>--}}
-
-
                     <div class="col-12">
-                        <button class="btn btn-success" type="submit">Submit Book</button>
+                        <button class="btn btn-success" type="submit">Add Book</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-  {{--  <script>
-        validationDate.min = new Date().toISOString().split("T")[0]; // min date for time slot
-
-    </script>--}}
 @endsection
+
 

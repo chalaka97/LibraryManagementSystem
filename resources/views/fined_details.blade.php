@@ -59,7 +59,7 @@
                                     <td>Reference</td>
                                     <td>5</td>
                                     <td>220</td>
-                                    <td> <button class="btn btn-primary" type="submit">Mark as received</button></td>
+                                    <td> <button class="btn btn-primary" type="submit">Mark as received & Remove Suspend</button></td>
                                 </tr>
 
                                 </tbody>

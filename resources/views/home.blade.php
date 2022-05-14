@@ -41,13 +41,13 @@
                         <div class="input-group">
 
 
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" name="user_id" aria-label="Default select example">
                                 @foreach ($allusers as $dataAllUsers)
                                 <option value="{{ $dataAllUsers->id }}">{{ $dataAllUsers->u_name }} - {{ $dataAllUsers->u_type }} </option>
 
 
                                 @endforeach
-                                    <input type="hidden" name="user_type" value="{{ $dataAllUsers->u_type }}">
+
 
                             </select>
 
@@ -56,23 +56,22 @@
                     <div class="col-md-6">
                         <label for="validationAddress" class="form-label">Book</label>
                         <div class="input-group">
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" name="selected_book" aria-label="Default select example">
                                 @foreach ($allbooks as $dataAlllBooks)
                                 <option value="{{ $dataAlllBooks->id }}">{{ $dataAlllBooks->b_title }} - {{ $dataAlllBooks->b_type }} </option>
 
                                 @endforeach
-                                    <input type="hidden" name="book_type" value="{{ $dataAlllBooks->b_type}}">
+
                             </select>
                         </div>
                     </div>
 
                     <div class="">
-                        @if($msg=\Illuminate\Support\Facades\Session::get('success_bookborrowed'))
+                        @if($msg=\Illuminate\Support\Facades\Session::get('success_book'))
                             <div class="alert alert-success mt-3 mb-3">
                                 {{ $msg }}
                             </div>
-                        @endif
-                        @if($msg=\Illuminate\Support\Facades\Session::get('error_bookborrowed'))
+                        @elseif($msg=\Illuminate\Support\Facades\Session::get('error_book'))
                             <div class="alert alert-danger mt-3 mb-3">
                                 <h5 class="mt-5">Note: </h5> <label>{{ $msg }}</label>
                             </div>

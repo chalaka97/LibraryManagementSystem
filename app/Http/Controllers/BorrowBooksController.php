@@ -31,6 +31,7 @@ class BorrowBooksController extends Controller
             ->where('received_date', null)
             ->select('borrow_books.*', 'books.b_title', 'books.b_type', 'library_users.u_name')
             ->get();
+       /* dd($borrowedList);*/
         return view('borrowed_books', ['borrowedBooks' => $borrowedList]); //not received
     }
 

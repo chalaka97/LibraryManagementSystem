@@ -25,6 +25,9 @@ Route::post('/checkadd', [App\Http\Controllers\BorrowBooksController::class, 'ch
 
 
 Route::get('/fined-details', [App\Http\Controllers\FinedDetailsController::class, 'index'])->name('fined-details');
+Route::get('/fineddetails', [App\Http\Controllers\FinedDetailsController::class, 'finedDetailsUpdate'])->name('fineddetails');
+
+
 Route::get('/users', [App\Http\Controllers\LibraryUsersController::class, 'index'])->name('users');
 Route::post('/addlibraryuser',[App\Http\Controllers\LibraryUsersController::class,'addUser'])->name('addlibraryuser');
 

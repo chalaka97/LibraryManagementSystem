@@ -68,6 +68,15 @@
                     </div>
                 </form>
             </div>
+            <div>
+                <h2 class="text h2">for check</h2>
+                <div class="btn btn-info">
+                    <a href="{{route('fineddetails')}}">
+                        <p class="text-white ">Fined DEtails</p>
+                    </a>
+                </div>
+
+            </div>
         </div>
     </div>
 @endsection

@@ -41,7 +41,7 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
+
                                     <th scope="col">User</th>
                                     <th scope="col">Book</th>
                                     <th scope="col">Book Type</th>
@@ -52,40 +52,26 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($fined as $datafined)
                                 <tr>
-                                    <td>321</td>
-                                    <td>Supun - Student</td>
-                                    <td>Gam peraliya</td>
-                                    <td>Reference</td>
-                                    <td>5</td>
-                                    <td>220</td>
-                                    <td> <button class="btn btn-primary" type="submit">Mark as received & Remove Suspend</button></td>
-                                </tr>
+                                    <td>{{$datafined->u_name}}</td>
+                                    <td>{{$datafined->b_title}}</td>
+                                    <td>{{$datafined->b_type}}</td>
+                                    <td>{{$datafined->f_days}}</td>
+                                    <td>{{$datafined->f_total_payment}}</td>
 
+                                    <td><a href="markasreceived-n/{{$datafined->b_id}}/{{$datafined->id}}">
+                                            <p class="btn btn-primary">Mark as received</p>
+                                        </a></td>
+                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </form>
             </div>
-            <div>
-                <h2 class="text h2">for check</h2>
-                <div class="btn btn-info">
-                    <a href="{{route('fineddetails')}}">
-                        <p class="text-white ">Fined DEtails</p>
-                    </a>
-                </div>
 
-            </div>
-            <div>
-                <h2 class="text h2">for check</h2>
-                <div class="btn btn-success">
-                    <a href="{{route('sendmailroute')}}">
-                        <p class="text-white ">send Mail</p>
-                    </a>
-                </div>
-
-            </div>
         </div>
     </div>
 @endsection

@@ -23,6 +23,7 @@ Route::get('/home', [App\Http\Controllers\BorrowBooksController::class, 'index']
 Route::get('/borrowed', [App\Http\Controllers\BorrowBooksController::class, 'borrowedBook'])->name('borrowed');
 Route::post('/checkadd', [App\Http\Controllers\BorrowBooksController::class, 'checkAvailability'])->name('checkadd');
 Route::get('/markasreceived/{id}', [App\Http\Controllers\BorrowBooksController::class, 'markAsReceived']);
+Route::get('/markasreceived-n/{b_id}/{id}', [App\Http\Controllers\BorrowBooksController::class, 'markAsReceivedFined']);
 
 
 Route::get('/fined-details', [App\Http\Controllers\FinedDetailsController::class, 'index'])->name('fined-details');

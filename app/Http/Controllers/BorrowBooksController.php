@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Books;
 use App\Models\BorrowBooks;
+use App\Models\FinedDetails;
 use App\Models\LibraryUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +40,11 @@ class BorrowBooksController extends Controller
     public function checkAvailability(Request $request)
     {
         $bookTypeId = $request->selected_book;
-        $check = DB::select("select b_book_type as btype, library_users.u_type as utype, count(borrow_books.id) as count  from borrow_books , books, library_users where borrow_books.book_id = books.id AND borrow_books.user_id =library_users.id AND borrow_books.book_id = $bookTypeId and borrow_books.b_book_type = books.b_type AND borrow_books.user_id = $request->user_id  and received_date is null");
+        $check = DB::select("select b_book_type as btype, library_users.u_type as utype, count(borrow_books.id) as count
+        from borrow_books , books, library_users where borrow_books.book_id = books.id
+        AND borrow_books.user_id =library_users.id AND borrow_books.book_id = $bookTypeId
+        and borrow_books.b_book_type = books.b_type AND borrow_books.user_id = $request->user_id
+        and received_date is null");
         /*select count(borrow_books.id) as count from borrow_books , books where borrow_books.book_id = books.id AND borrow_books.book_id = 1 and borrow_books.b_book_type = books.b_type AND borrow_books.user_id = 2 and received_date is null*/
         /*echo $check[0]->btype;
         echo $check[0]->utype;
@@ -158,6 +163,20 @@ class BorrowBooksController extends Controller
 
         ];
         if(BorrowBooks::where('id',$id)->update($up)){
+            return redirect()->back()->with('update_success','Update Successful');
+        }else{
+            return redirect()->back()->with('update_error','Error.');
+        }
+    }
+    public function markAsReceivedFined($b_id,$id){
+        $up=[
+            'received_date'=>date('Y-m-d'),
+
+        ];
+        $upFined=[
+            'is_received'=>1,
+        ];
+        if((BorrowBooks::where('id',$b_id)->update($up)) && (FinedDetails::where('id',$id)->update($upFined))){
             return redirect()->back()->with('update_success','Update Successful');
         }else{
             return redirect()->back()->with('update_error','Error.');

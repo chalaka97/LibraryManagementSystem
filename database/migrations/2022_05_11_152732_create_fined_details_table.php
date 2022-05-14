@@ -21,6 +21,7 @@ class CreateFinedDetailsTable extends Migration
             $table->foreign('f_b_book_id')->references('id')->on('borrow_books')->onDelete('cascade');
             $table->integer('f_days'); //total days count
             $table->double('f_total_payment');
+            $table->tinyInteger('is_received')->default(0);
             $table->timestamps();
         });
     }

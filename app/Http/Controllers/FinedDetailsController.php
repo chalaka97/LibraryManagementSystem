@@ -21,13 +21,22 @@ class FinedDetailsController extends Controller
     public function index()
     {
 
-        return view('fined_details');
+        $fined = DB::select("SELECT fined_details.id as id, fined_details.f_b_book_id
+        as b_id,library_users.u_name, books.b_title,books.b_type, fined_details.f_days, fined_details.f_total_payment
+        FROM fined_details,books,library_users,borrow_books WHERE fined_details.f_user_id = library_users.id
+        AND fined_details.f_b_book_id = borrow_books.id AND borrow_books.book_id = books.id AND fined_details.is_received=0;");
+
+        return view('fined_details',['fined'=>$fined]);
     }
 
     protected function finedDetailsUpdate(Schedule $schedule)
     {
         $schedule->call(function () {
-            $getNotReceivedDetails = DB::select("SELECT borrow_books.id as borrowed_id, books.id as book_id,books.b_type,library_users.id as user_id,library_users.u_type,borrow_books.borrow_date,DATEDIFF(now(),borrow_books.borrow_date) as dayscount FROM borrow_books,books,library_users WHERE borrow_books.user_id = library_users.id AND borrow_books.book_id = books.id AND borrow_books.received_date is null");
+            $getNotReceivedDetails = DB::select("SELECT borrow_books.id as borrowed_id, books.id as
+            book_id,books.b_type,library_users.id as user_id,library_users.u_type,borrow_books.borrow_date,
+            DATEDIFF(now(),borrow_books.borrow_date) as dayscount FROM borrow_books,books,library_users
+            WHERE borrow_books.user_id = library_users.id AND borrow_books.book_id = books.id
+            AND borrow_books.received_date is null");
 
             for ($i = 0; $i < count($getNotReceivedDetails); $i++) {
 

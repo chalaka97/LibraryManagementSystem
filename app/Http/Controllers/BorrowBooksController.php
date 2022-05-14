@@ -152,4 +152,15 @@ class BorrowBooksController extends Controller
 
         return $addBorrow->save();
     }
+    public function markAsReceived($id){
+        $up=[
+            'received_date'=>date('Y-m-d'),
+
+        ];
+        if(BorrowBooks::where('id',$id)->update($up)){
+            return redirect()->back()->with('update_success','Update Successful');
+        }else{
+            return redirect()->back()->with('update_error','Error.');
+        }
+    }
 }

@@ -77,6 +77,15 @@
                 </div>
 
             </div>
+            <div>
+                <h2 class="text h2">for check</h2>
+                <div class="btn btn-success">
+                    <a href="{{route('sendmailroute')}}">
+                        <p class="text-white ">send Mail</p>
+                    </a>
+                </div>
+
+            </div>
         </div>
     </div>
 @endsection

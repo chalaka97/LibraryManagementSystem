@@ -33,6 +33,18 @@
             </div>
             <div class="col-10 mt-3">
                 <h3 class="text">Borrowed Book Details</h3>
+                <div class="">
+                    @if($msg=\Illuminate\Support\Facades\Session::get('update_success'))
+                        <div class="alert alert-success mt-3 mb-3">
+                            {{ $msg }}
+                        </div>
+                    @endif
+                    @if($msg=\Illuminate\Support\Facades\Session::get('update_error'))
+                        <div class="alert alert-danger mt-3 mb-3">
+                            {{ $msg }}
+                        </div>
+                    @endif
+                </div>
                 <form class="row g-3" method="post" enctype="multipart/form-data" action="">
                     @csrf
 
@@ -58,7 +70,10 @@
                                     <td>{{$dataBorrowedBooks->b_title}}</td>
                                     <td>{{$dataBorrowedBooks->b_type}}</td>
                                     <td>{{$dataBorrowedBooks->borrow_date}}</td>
-                                    <td> <button class="btn btn-primary" type="submit">Mark as received</button></td>
+
+                                    <td><a href="markasreceived/{{$dataBorrowedBooks->id}}">
+                                            <p class="btn btn-primary">Mark as received</p>
+                                        </a></td>
                                 </tr>
                                 @endforeach
 

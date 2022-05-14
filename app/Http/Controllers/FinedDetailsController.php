@@ -91,11 +91,11 @@ class FinedDetailsController extends Controller
         }
 
     }
-
-    public function sendMain()
+    protected function sendMain(Schedule $schedule)
     {
 
-        $finedDetails = DB::select("SELECT books.b_title as book_name,books.b_type as book_type,library_users.u_name
+        $schedule->call(function () {
+            $finedDetails = DB::select("SELECT books.b_title as book_name,books.b_type as book_type,library_users.u_name
         as user_name, library_users.u_email as email, library_users.u_type ,borrow_books.borrow_date, fined_details.f_days
         as days, fined_details.f_total_payment as payment
         from borrow_books,books,library_users,fined_details
@@ -103,10 +103,11 @@ class FinedDetailsController extends Controller
         AND fined_details.f_b_book_id = borrow_books.id AND books.id=borrow_books.book_id");
 
 
-        for ($i = 0; $i < count($finedDetails); $i++) {
+            for ($i = 0; $i < count($finedDetails); $i++) {
 
-        Mail::to($finedDetails[$i]->email)->send(new FinedDetailsMail($finedDetails));
-        }
+                Mail::to($finedDetails[$i]->email)->send(new FinedDetailsMail($finedDetails));
+            }
+        })->dailyAt('13:00');
 
     }
 }

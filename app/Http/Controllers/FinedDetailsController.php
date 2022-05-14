@@ -107,7 +107,7 @@ class FinedDetailsController extends Controller
 
                 Mail::to($finedDetails[$i]->email)->send(new FinedDetailsMail($finedDetails));
             }
-        })->dailyAt('13:00');
+        })->cron('0 */2 * * *');
 
     }
 }

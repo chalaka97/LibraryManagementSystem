@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\FinedDetailsMail;
 use App\Models\BorrowBooks;
 use App\Models\FinedDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use phpDocumentor\Reflection\Types\Integer;
 use Illuminate\Console\Scheduling\Schedule;
+
 class FinedDetailsController extends Controller
 {
     public function __construct()
@@ -20,10 +23,10 @@ class FinedDetailsController extends Controller
 
         return view('fined_details');
     }
-    
+
     protected function finedDetailsUpdate(Schedule $schedule)
     {
-        $schedule->call(function  () {
+        $schedule->call(function () {
             $getNotReceivedDetails = DB::select("SELECT borrow_books.id as borrowed_id, books.id as book_id,books.b_type,library_users.id as user_id,library_users.u_type,borrow_books.borrow_date,DATEDIFF(now(),borrow_books.borrow_date) as dayscount FROM borrow_books,books,library_users WHERE borrow_books.user_id = library_users.id AND borrow_books.book_id = books.id AND borrow_books.received_date is null");
 
             for ($i = 0; $i < count($getNotReceivedDetails); $i++) {
@@ -69,6 +72,7 @@ class FinedDetailsController extends Controller
 
         })->daily();
     }
+
     public function updateBorrowAndFinedTables($borrowID, $userID, $bookID, $days, $fee)
     {
         $updateBorrow = [
@@ -81,9 +85,27 @@ class FinedDetailsController extends Controller
         $finedTable->f_total_payment = $fee;
 
         if (BorrowBooks::where('id', $borrowID)->update($updateBorrow) && $finedTable->save()) {
-            echo "added";
+            /*echo "added";*/
         } else {
-            echo "error";
+            /*echo "error";*/
+        }
+
+    }
+
+    public function sendMain()
+    {
+
+        $finedDetails = DB::select("SELECT books.b_title as book_name,books.b_type as book_type,library_users.u_name
+        as user_name, library_users.u_email as email, library_users.u_type ,borrow_books.borrow_date, fined_details.f_days
+        as days, fined_details.f_total_payment as payment
+        from borrow_books,books,library_users,fined_details
+        WHERE fined_details.f_user_id = library_users.id
+        AND fined_details.f_b_book_id = borrow_books.id AND books.id=borrow_books.book_id");
+
+
+        for ($i = 0; $i < count($finedDetails); $i++) {
+
+        Mail::to($finedDetails[$i]->email)->send(new FinedDetailsMail($finedDetails));
         }
 
     }

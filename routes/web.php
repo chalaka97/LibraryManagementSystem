@@ -22,10 +22,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\BorrowBooksController::class, 'index'])->name('home');
 Route::get('/borrowed', [App\Http\Controllers\BorrowBooksController::class, 'borrowedBook'])->name('borrowed');
 Route::post('/checkadd', [App\Http\Controllers\BorrowBooksController::class, 'checkAvailability'])->name('checkadd');
+Route::get('/markasreceived/{id}', [App\Http\Controllers\BorrowBooksController::class, 'markAsReceived']);
 
 
 Route::get('/fined-details', [App\Http\Controllers\FinedDetailsController::class, 'index'])->name('fined-details');
 Route::get('/fineddetails', [App\Http\Controllers\FinedDetailsController::class, 'finedDetailsUpdate'])->name('fineddetails');
+Route::get('/sendmailroute', [App\Http\Controllers\FinedDetailsController::class, 'sendMain'])->name('sendmailroute');
 
 
 Route::get('/users', [App\Http\Controllers\LibraryUsersController::class, 'index'])->name('users');

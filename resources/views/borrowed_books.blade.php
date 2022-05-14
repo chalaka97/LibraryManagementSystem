@@ -52,12 +52,12 @@
                                 </thead>
                                 <tbody>
                                 @foreach($borrowedBooks as $dataBorrowedBooks)
-                                <tr>lz
-                                    <td>{{$borrowedBooks->id}}</td>
-                                    <td>{{$borrowedBooks->u_name}}</td>
-                                    <td>{{$borrowedBooks->b_title}}</td>
-                                    <td>{{$borrowedBooks->b_type}}</td>
-                                    <td>{{$borrowedBooks->borrow_date}}</td>
+                                <tr>
+                                    <td>{{$dataBorrowedBooks->id}}</td>
+                                    <td>{{$dataBorrowedBooks->u_name}}</td>
+                                    <td>{{$dataBorrowedBooks->b_title}}</td>
+                                    <td>{{$dataBorrowedBooks->b_type}}</td>
+                                    <td>{{$dataBorrowedBooks->borrow_date}}</td>
                                     <td> <button class="btn btn-primary" type="submit">Mark as received</button></td>
                                 </tr>
                                 @endforeach
